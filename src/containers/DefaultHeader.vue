@@ -1,7 +1,7 @@
 <template>
     <AppHeader fixed>
       <b-link class="navbar-brand" to="#">
-        <h2>PRUEBA</h2>
+        <h2>SOGA</h2>
       </b-link>
       <b-navbar-nav class="ml-auto">
         <DefaultHeaderDropdownAccnt/>

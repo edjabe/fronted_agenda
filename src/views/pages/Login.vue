@@ -19,26 +19,14 @@
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
                     <b-form-input type="password" v-model="user.password" class="form-control" placeholder="Contraseña" autocomplete="current-password" />
                   </b-input-group>
-                  <b-row>
-                    <b-col cols="6">
+                  <b-row class="text-center">
+                    <b-col cols="12">
                       <b-button variant="primary" class="px-4" @click="login" :disabled="$store.getters['loading']" >
                         <b-spinner small  v-if="$store.getters['loading']"/> Ingresar
                       </b-button>
                     </b-col>
-                    <b-col cols="6" class="text-right">
-                      <b-button variant="link" class="px-0">Olvidaste la contraseña?</b-button>
-                    </b-col>
                   </b-row>
                 </b-form>
-              </b-card-body>
-            </b-card>
-            <b-card no-body class="text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <b-card-body class="text-center">
-                <div>
-                  <h2>Registrate</h2>
-                  <p>No tienes cuenta con nosotros? Recuerda que si deseas ver la disponibilidad y apartar tu cita, debes crear un cuenta.</p>
-                  <b-button variant="primary" class="active mt-3">Registrate ahora!</b-button>
-                </div>
               </b-card-body>
             </b-card>
           </b-card-group>

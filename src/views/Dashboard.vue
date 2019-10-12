@@ -1,5 +1,5 @@
 <template>
-  <div id="principal" class="row">
+  <div class="row espacio_top">
     <div class="col-md-12">
         <div class="card">
           <div class="loader" v-if="this.$store.getters['prestacion/loading']"><i class="fa fa-spinner fa-2x fa-spin text-info"></i></div>
@@ -47,11 +47,45 @@
                 </div>
               </div>
               <div v-if="disponibilidad.length > 0" :hidden="this.$store.getters['agenda/loading'] == true" class="row">
+
+
                 <div class="col-md-6 text-center">
                   <b>Sede: </b> {{nombre_sede}}
                 </div>
                 <div class="col-md-6 text-center">
                   <b>Prestación: </b> {{nombre_prestacion}}
+                </div>
+
+                <div class="col-md-12 espacio_top">
+                  <table class="table table-responsive-sm">
+                    <thead>
+                      <tr class="text-center">
+                        <th>Fecha</th>
+                        <th>Disponibilidad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template v-for="(value, index) in disponibilidad">
+                          <tr v-for="(valor, fecha) in value" class="text-center">
+                            <td>{{fecha}}</td>
+                            <td>
+                              <template  v-for="(hora) in valor.intervalos">
+                                <span  :class="hora.disponible==1?'badge-success':'badge-secondary'" class="badge espacio_derecha">
+                                  {{hora.hora | moment("h:m")}}
+                                </span>
+                              </template>
+                            </td>
+                          </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                  <div class="espacio_top text-center">
+                    <span class="text-muted">
+                      <b>*</b> Recuerde que los horarios verde son los que se encuentran disponibles, y los grises ya estan tomados.
+                    </span>
+                  </div>
+                </div>
+
                 </div>
               </div>
             </div>
@@ -170,8 +204,12 @@ export default {
             align-items: center;
   }
 
-  #principal {
+  .espacio_top {
     margin-top: 1.5rem;
+  }
+
+  .espacio_derecha {
+    margin-right: 12px
   }
 
 </style>
