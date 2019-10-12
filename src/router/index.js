@@ -60,15 +60,18 @@ const User = () => import('@/views/users/User')
 
 Vue.use(Router)
 
-function configRoutes() {
-  return [
-    {
+export default new Router({
+  mode: 'history', // https://router.vuejs.org/api/#mode
+  linkActiveClass: 'open active',
+  scrollBehavior: () => ({
+    y: 0
+  }),
+  routes: [{
       path: '/',
-      redirect: '/dashboard',
+      redirect: '/pages/login',
       name: 'Home',
       component: DefaultContainer,
-      children: [
-        {
+      children: [{
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
@@ -78,10 +81,11 @@ function configRoutes() {
           redirect: '/theme/colors',
           name: 'Theme',
           component: {
-            render (c) { return c('router-view') }
+            render(c) {
+              return c('router-view')
+            }
           },
-          children: [
-            {
+          children: [{
               path: 'colors',
               name: 'Colors',
               component: Colors
@@ -105,18 +109,23 @@ function configRoutes() {
         },
         {
           path: 'users',
-          meta: { label: 'Users'},
-          component: {
-            render (c) { return c('router-view') }
+          meta: {
+            label: 'Users'
           },
-          children: [
-            {
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
               path: '',
               component: Users,
             },
             {
               path: ':id',
-              meta: { label: 'User Details'},
+              meta: {
+                label: 'User Details'
+              },
               name: 'User',
               component: User,
             },
@@ -127,10 +136,11 @@ function configRoutes() {
           redirect: '/base/cards',
           name: 'Base',
           component: {
-            render (c) { return c('router-view') }
+            render(c) {
+              return c('router-view')
+            }
           },
-          children: [
-            {
+          children: [{
               path: 'cards',
               name: 'Cards',
               component: Cards
@@ -217,10 +227,11 @@ function configRoutes() {
           redirect: '/buttons/standard-buttons',
           name: 'Buttons',
           component: {
-            render (c) { return c('router-view') }
+            render(c) {
+              return c('router-view')
+            }
           },
-          children: [
-            {
+          children: [{
               path: 'standard-buttons',
               name: 'Standard Buttons',
               component: StandardButtons
@@ -247,10 +258,11 @@ function configRoutes() {
           redirect: '/icons/font-awesome',
           name: 'Icons',
           component: {
-            render (c) { return c('router-view') }
+            render(c) {
+              return c('router-view')
+            }
           },
-          children: [
-            {
+          children: [{
               path: 'coreui-icons',
               name: 'CoreUI Icons',
               component: CoreUIIcons
@@ -277,10 +289,11 @@ function configRoutes() {
           redirect: '/notifications/alerts',
           name: 'Notifications',
           component: {
-            render (c) { return c('router-view') }
+            render(c) {
+              return c('router-view')
+            }
           },
-          children: [
-            {
+          children: [{
               path: 'alerts',
               name: 'Alerts',
               component: Alerts
@@ -304,10 +317,11 @@ function configRoutes() {
       redirect: '/pages/404',
       name: 'Pages',
       component: {
-        render (c) { return c('router-view') }
+        render(c) {
+          return c('router-view')
+        }
       },
-      children: [
-        {
+      children: [{
           path: '404',
           name: 'Page404',
           component: Page404
@@ -330,11 +344,4 @@ function configRoutes() {
       ]
     }
   ]
-}
-
-export default new Router({
-  mode: 'hash', // https://router.vuejs.org/api/#mode
-  linkActiveClass: 'open active',
-  scrollBehavior: () => ({ y: 0 }),
-  routes: configRoutes()
 })
