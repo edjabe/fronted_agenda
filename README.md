@@ -25,7 +25,7 @@ VUE_APP_API=http://backend_agenda.test/api/v1
 
 ```
 
-## Ejecución y uso
+## 2. Ejecución y uso
 
 ``` bash
 # Una vez configurado el archivo .env dentramos dentro del proyecto fronted_agenda y ejecutamos el siguiente comando:
