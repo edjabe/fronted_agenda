@@ -1,5 +1,7 @@
 Frontend agenda es una aplicacion hecha en vue.js la cual consume los servicios por medio de api del backend_agenda (https://github.com/edjabe/backend_agenda).
 
+NOTA: Recuerde que primero debe configurar el repositorio de backend_agenda, ya que de el se consumiran los servicios.
+
 ## Proceso de instalación
 
 ### 1. Clonar el repositorio
