@@ -2,40 +2,13 @@
   <AppHeaderDropdown right no-caret>
     <template slot="header">
       <img
-        src="img/avatars/6.jpg"
+        src="img/avatars/7.jpg"
         class="img-avatar"
         alt="admin@bootstrapmaster.com" />
     </template>\
     <template slot="dropdown">
-      <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>
-      <b-dropdown-item><i class="fa fa-bell-o" /> Updates
-        <b-badge variant="info">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-envelope-o" /> Messages
-        <b-badge variant="success">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-tasks" /> Tasks
-        <b-badge variant="danger">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-comments" /> Comments
-        <b-badge variant="warning">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-header
-        tag="div"
-        class="text-center">
-        <strong>Settings</strong>
-      </b-dropdown-header>
-      <b-dropdown-item><i class="fa fa-user" /> Profile</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-wrench" /> Settings</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-usd" /> Payments
-        <b-badge variant="secondary">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-file" /> Projects
-        <b-badge variant="primary">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-divider />
-      <b-dropdown-item><i class="fa fa-shield" /> Lock Account</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-lock" /> Logout</b-dropdown-item>
+      <b-dropdown-item><b>{{usuario.nombres + ' ' + usuario.apellidos}}</b></b-dropdown-item>
+      <b-dropdown-item @click="logout"><i class="fa fa-power-off" /> Logout</b-dropdown-item>
     </template>
   </AppHeaderDropdown>
 </template>
@@ -44,11 +17,33 @@
 import { HeaderDropdown as AppHeaderDropdown } from '@coreui/vue'
 export default {
   name: 'DefaultHeaderDropdownAccnt',
+  computed: {
+        tipo_adiciones() {
+            return  !this.$store.getters['parametrizacion/loading']? this.$store.getters['parametrizacion/datos'] : []
+        },
+        progress_text () {
+            return this.$store.getters['adicion/progress_text'];
+        },
+        usuario () {
+            return this.$store.getters['login/user']
+        },
+    },
   components: {
     AppHeaderDropdown
   },
   data: () => {
     return { itemsCount: 42 }
-  }
+  },
+  methods: {
+        logout () {
+            this.$store.dispatch('login/logout', this.user)
+            .then((data) => {
+                this.error = null;
+                this.$router.push('/pages/login')
+            }).catch(error => {
+                error.status == 401? this.error = error.data.error : console.log(error);
+            })
+        }
+    }
 }
 </script>
